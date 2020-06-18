@@ -1,0 +1,9 @@
+---
+# vars file for criando-instancias
+instance_type: t2.micro
+sec_group_name: ansible-devops
+image: ami-085925f297f89fce1
+keypair: ansible-class
+region: us-east-1
+count: 3
+profile: ansible-cloud
