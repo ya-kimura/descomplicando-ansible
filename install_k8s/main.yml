@@ -20,3 +20,9 @@
   user: ubuntu
   roles:
   - { role: join-workers, tags: ["create_cluster_role"] }
+
+- hosts: k8s_master
+  become: yes
+  user: ubuntu
+  roles:
+  - { role: install-helm, tags: ["install_helm_role"] } 
