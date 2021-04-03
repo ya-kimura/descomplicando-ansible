@@ -10,7 +10,7 @@
   add_repository: 
     repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
     state: present
-
+    
 - name: Instalando os pacotes kubeadm, kublet e kubctl
   apt:
     name: "{{ packeages }}"
