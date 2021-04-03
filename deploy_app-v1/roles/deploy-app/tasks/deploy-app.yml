@@ -1,0 +1,30 @@
+- name: Cria o diretorio da app StarTrek 
+  file: path={{item}} state=directory
+  with_items:
+    - /opt/startrek 
+    - /opt/startrek/logs
+    - /opt/startrek/conf
+  register: cria_diretorios
+   
+- name: Copia o arquivo de deployment da app StarTrek para o host
+  templante:
+    src: app-v1.yml.j2
+    dest: /opt/startrek/app-v1.yml
+    owner: root
+    group: root
+    mode: 0644
+  register: copia_template
+
+- name: Copia o arquivo de service da app para o hosts
+  copy: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: 'service-app.yml', dest: '/opt/startrek/service-app.yml'}
+  register: copia_service_app
+
+- name: Cria o deploy da app StarTrek
+  shell: kubectl apply -f /opt/startrek/app-v1.yml
+  register: deploy_app
+
+- name: Cria o Service da app StarTrek
+  shell: kubectl apply -f service-app.yml
+  register: deploy_service_app

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: startrek-v1
+spec:
+  replicas: {{ number_replicas }}
+  selector:
+    matchLabels:
+      app: startrek
+      version: {{ version }}
+    annotations:
+      prometheus.io/scrape: "{{ prometheus_scrape }}
+      prometheus.io/port: {{ prometheus_port }}
+    spec:
+     containers:
+     - name: startrek
+       image: linuxtips/nginx-prometheus-exporter:{{ version }}
+       env:
+       - name: VERSION 
+         value: {{ version }}
+        ports:
+        - containerPort: {{ nginx_port }}
+        - containerPort: {{ prometheus_port }}     
