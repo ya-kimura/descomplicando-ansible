@@ -61,6 +61,16 @@
       to_port: 6784
       cidr_ip: 0.0.0.0/0
       rule_desc: Weavenet
+    - proto: tcp
+      from_port: 32222
+      to_port: 32222
+      cidr_ip: 0.0.0.0/0
+      rule_desc: startrek_app
+    - proto: tcp
+      from_port: 32111
+      to_port: 32111
+      cidr_ip: 0.0.0.0/0
+      rule_desc: startrek_app
     rules_egress:
     rules_egress:
     rules_egress:
